@@ -1,0 +1,27 @@
+aside {
+  width: 20%;
+  float: left;
+  background-color: #e0e0e0;
+  border-left: 1px solid white;
+  padding: 0.1em;
+}
+section {
+  width: 80%;
+  float: right;
+}
+btn btn-outline-secondary {
+  --bs-btn-padding-y: 0.25rem;
+  --bs-btn-padding-x: 0.5rem;
+}
+footer {
+  clear: both;
+  text-align: center;
+  background-color: #cfd8dc;
+}
+
+ul {
+  list-style: none;
+}
+#ImgS2 {
+  float: left;
+}
