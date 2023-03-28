@@ -186,6 +186,7 @@ export class AppComponent {
   pSeleccion = this.prodJson[0];
   productoFiltrado = this.prodJson;
   filtrado = '';
+  nombreModal = '';
 
   listaProductos(product: any) {
     this.pSeleccion = product;
@@ -196,6 +197,7 @@ export class AppComponent {
       nombre.product.toLowerCase().includes(this.filtrado.toLowerCase())
     );
   }
+
   reset() {
     this.productoFiltrado = this.prodJson;
     this.filtrado = '';

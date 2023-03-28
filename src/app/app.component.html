@@ -1,176 +1,160 @@
 <body>
   <!-- navegador -->
-  <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary"> -->
-  <nav class="navbar">
-    <div class="container-fluid">
-      <a
-        href="/"
-        class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
-      >
-        <a class="navbar-brand" href="#">
-          <img
-            src="./assets/images/2proyecto/logo.png"
-            width="45"
-            height="45"
-          />
-        </a>
-        <span class="fs-4">logo</span>
-      </a>
-      <ul class="nav nav-pills">
-        <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Shop</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Help</a></li>
+  <nav class="navbar navbar-expand">
+    <img
+      class="navbar-brand mx-5"
+      id="logo"
+      src="./assets/images/2proyecto/logo.png"
+      alt=""
+    />
+    <div class="navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item p-2 border-end">
+          <a class="nav-link active" id="navlink" href="#">Home</a>
+        </li>
+        <li class="nav-item p-2 border-end">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item p-2 border-end">
+          <a class="nav-link" href="#">Shop</a>
+        </li>
+        <li class="nav-item p-2">
+          <a class="nav-link" href="#">Help</a>
+        </li>
+        <li class="nav-item py-3 mx-4">
+          <button class="bg-secondary text-white">Your Cart</button>
+        </li>
       </ul>
-
-      <button type="button" class="btn btn-outline-secondary">Your Cart</button>
     </div>
   </nav>
-  <!--main general-->
-  <main class="mainContainer">
-    <!--aside-->
-    <aside class="left-menu">
-      <div class="buttonsContainer">
+  <div class="main">
+    <!--Aside-->
+    <aside id="aside">
+      <div class="row p-4">
         <input
           type="text"
-          class="imput"
-          id="cajaFiltro"
-          placeholder="Nombre Producto"
           [(ngModel)]="filtrado"
+          placeholder="Nombre del producto"
+          class="form-control"
         />
-        <button
-          type="button"
-          class="btn btn-secondary"
-          (click)="filtrarNombre()"
-        >
-          Filter
-        </button>
-        <button type="button" class="btn btn-secondary" (click)="reset()">
-          Reset Filter
-        </button>
-      </div>
-      <div class="menuContainer">
-        <h4>Products</h4>
-        <ul>
-          <li *ngFor="let product of productoFiltrado; let index = index">
-            <a>
-              <button class="btn" (click)="listaProductos(product)">
-                {{ product.product }}</button
-              ><span>></span></a
-            >
-          </li>
-          <!--
-          <li>
-            <a href="#"> Product 1 <span>></span></a>
-          </li>
-          <li>
-            <a href="#"> Product 2 <span>></span></a>
-          </li>
-          <li>
-            <a href="#"> Product 3 <span>></span></a>
-          </li>
-          <li>
-            <a href="#"> Product 4 <span>></span></a>
-          </li>
-          <li>
-            <a href="#"> Product 5 <span>></span></a>
-          </li>
-          <li>
-            <a href="#"> Product 6 <span>></span></a>
-          </li>-->
-        </ul>
-      </div>
-    </aside>
-    <!--seccion derecha  producto seleccionado -->
-    <section class="content">
-      <!--arriba-->
-      <div class="mainProduct">
-        <div class="imagenProd">
-          <img src="{{ pSeleccion.image }}" />
-        </div>
-
-        <div class="contenidoProd">
-          <h4>{{ pSeleccion.product }}</h4>
-          <!--<h6>
-            {{ pSeleccion.rating }}
-            ☆ reviews
-          </h6>-->
-          <div class="container">
-            <div class="row">
-              <div class="col-sm">
-                <span
-                  *ngFor="let estrella of estrellaYellow; let i = index"
-                  [ngClass]="{ estrellaYellow: i < pSeleccion.rating }"
-                >
-                  ★</span
-                >
-              </div>
-            </div>
-          </div>
-          <hr />
-          <h4>$ {{ pSeleccion.price }}</h4>
-          <hr />
-          <p class="descriptionPd">
-            {{ pSeleccion.description }}
-          </p>
-          <hr />
+        <div class="col-12 py-2">
           <div class="buttonsContainer">
-            <button class="btn btn-secondary" (click)="eliminar(pSeleccion.id)">
-              Delete Item
+            <button
+              type="button"
+              id="btnFiltrado"
+              class="btn btn-secondary"
+              (click)="filtrarNombre()"
+            >
+              Filter
+            </button>
+          </div>
+          <div class="col-12 py-2">
+            <button type="button" class="btn btn-secondary" (click)="reset()">
+              Reset Filter
             </button>
           </div>
         </div>
       </div>
-      <!--centro  -- similar -->
-      <div class="similarProd">
-        <h4>Similar Products</h4>
-        <div class="contenedorSimilar">
-          <div
-            class="similarprodItem"
-            *ngFor="let similarProducts of pSeleccion.similarProducts"
-          >
-            <!--<div class="imagenSimilar">image placeholder</div>-->
-            <img
-              class="btn ImageSim"
-              src="{{ similarProducts.image }}"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-            />
-            <div class="descSimilar">
-              <h5>{{ similarProducts.product }}</h5>
-              <!--<h6>{{ similarProducts.rating }} *</h6>-->
-              <div class="container">
-                <div class="row">
-                  <div class="col-sm">
-                    <span
-                      *ngFor="let estrella of estrellaYellow; let i = index"
-                      [ngClass]="{ estrellaYellow: i < similarProducts.rating }"
-                    >
-                      ★</span
-                    >
-                  </div>
-                </div>
-              </div>
-              <h6>$ {{ similarProducts.price }}</h6>
+      <div class="row m-3">
+        <div class="col-12 my-2">
+          <div class="menuContainer">
+            <h4>Products</h4>
+          </div>
+          <ul>
+            <li *ngFor="let product of productoFiltrado; let index = index">
+              <a>
+                <button class="btn" (click)="listaProductos(product)">
+                  {{ product.product }}</button
+                ><span>></span></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </aside>
+    <!--seccion derecha  producto seleccionado -->
+    <div class="container-fluid" id="pSelec">
+      <div class="row">
+        <!--arriba-->
+        <div class="col-6">
+          <img class="imagenProd" img src="{{ pSeleccion.image }}" />
+        </div>
+        <div class="col-6">
+          <div class="row bor">
+            <div class="col-12 py-3">
+              <h3>{{ pSeleccion.product }}</h3>
+              <span
+                *ngFor="let estrella of estrellaYellow; let i = index"
+                [ngClass]="{ estrellaYellow: i < pSeleccion.rating }"
+              >
+                ★</span
+              >
+            </div>
+            <hr />
+            <div class="col-12 py-4">
+              <h3>$ {{ pSeleccion.price }}</h3>
+              <hr />
+            </div>
+            <div class="col-12 py-4">
+              <p id="rFont">{{ pSeleccion.description }}</p>
+            </div>
+            <hr />
+            <div class="col-12 py-5">
+              <button
+                class="btn btn-secondary"
+                (click)="eliminar(pSeleccion.id)"
+              >
+                Delete Item
+              </button>
             </div>
           </div>
         </div>
+        <hr />
       </div>
-
-      <!--abajo -- reviews  -->
-      <div class="reviews">
-        <h4>Reviews</h4>
-        <div class="reviewItem" *ngFor="let review of pSeleccion.reviews">
-          <div class="avatar">
-            <div><img src="{{ review.image }}" /></div>
+      <!--centro  -- similar -->
+      <div class="row">
+        <div class="col-12 p-6">
+          <h2 class="text-center">
+            <u>Similar Products</u>
+          </h2>
+          <div class="row my-4">
+            <div
+              class="col-6 d-flex btn"
+              data-bs-toggle="modal"
+              data-bs-target="#similarModal"
+              *ngFor="let similarProducts of pSeleccion.similarProducts"
+            >
+              <div class="icon-square text-dark me-3">
+                <img id="ImageSim" src="{{ similarProducts.image }}" />
+              </div>
+              <div>
+                <h4>{{ similarProducts.product }}</h4>
+                <span
+                  *ngFor="let estrella of estrellaYellow; let i = index"
+                  [ngClass]="{ estrellaYellow: i < similarProducts.rating }"
+                >
+                  ★</span
+                >
+                <h6>$ {{ similarProducts.price }}</h6>
+              </div>
+            </div>
           </div>
-          <div class="userInfo">
-            <p class="userName">{{ review.name }}</p>
-            <p class="date">Date: {{ review.date }}</p>
-            <!-- <p class="star">{{ review.raging }}*</p>-->
-            <div class="container">
-              <div class="row">
-                <div class="col-sm">
+        </div>
+        <hr />
+      </div>
+      <!--abajo -- reviews  -->
+      <div class="row">
+        <div class="col-12">
+          <h1 class="p-4"><u>Reviews</u></h1>
+          <div class="row p-4" *ngFor="let review of pSeleccion.reviews">
+            <div class="col-3">
+              <img id="avatar" src="{{ review.image }}" alt="" />
+            </div>
+            <div class="col-3">
+              <div class="row my-3">
+                <div id="rFont" class="col-12 p-1">{{ review.name }}</div>
+                <div id="rFont" class="col-12 p-1">{{ review.raging }}</div>
+                <div id="rFont" class="col-12 p-1">
                   <span
                     *ngFor="let estrella of estrellaYellow; let i = index"
                     [ngClass]="{ estrellaYellow: i < review.raging }"
@@ -180,47 +164,46 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="reviewText">
-            <p>
-              {{ review.opinion }}
-            </p>
+            <div class="col-6">
+              <p id="rFont" class="my-2">{{ review.opinion }}</p>
+            </div>
           </div>
         </div>
-        <hr />
       </div>
-    </section>
-  </main>
-</body>
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">...</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="similarModal"
+      tabindex="-1"
+      aria-labelledby="similarModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5
+              class="modal-titles"
+              *ngFor="let similarProducts of pSeleccion.similarProducts"
+            >
+              {{ similarProducts.product }}
+            </h5>
+          </div>
+          <div class="modal-body">
+            <img class="w-100" src="" alt="foto" />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</body>

@@ -9,129 +9,80 @@ body {
     size: 15;
     max-lines: 30;
   }
-}
-.nav-link {
-  color: black;
-}
-.mainContainer {
-  display: flex;
-  flex-grow: 1;
-}
-.left-menu {
-  display: flex;
-  flex-direction: column;
-  width: 20%;
-  height: 100%;
-  gap: 3em;
+  #logo {
+    width: 8%;
+    height: 8%;
+  }
+  .navlink {
+    color: black;
+    border-left: 2px;
+  }
 
+  .menuContainer {
+    padding: 0 2em;
+  }
   .buttonsContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    width: 60%;
+    width: 100%;
     padding-top: 2em;
     padding-left: 2em;
   }
-  .menuContainer {
-    padding: 0 2em;
-    ul {
-      list-style: none;
-      padding: 0;
-      li {
-        border-bottom: 0.5px solid gray;
-        padding: 0.5em 0;
-        a {
-          display: flex;
-          justify-content: space-between;
-          text-decoration: none;
-          width: 100%;
-          color: black;
-          span {
-            margin-left: auto;
-          }
-        }
+}
+
+.main {
+  display: flex;
+}
+#aside {
+  width: 20%;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 0.5em 0;
+    a {
+      display: flex;
+      justify-content: space-between;
+      text-decoration: none;
+      width: 100%;
+      color: black;
+      font-size: 18px;
+      font-family: "Lucida Console";
+      span {
+        margin-left: auto;
+        font-size: 18px;
+        font-family: "Lucida Console";
       }
     }
   }
 }
+#pSelec {
+  width: 70%;
+}
+.imagenProd {
+  display: flex;
+  width: 100%;
+  height: 500px;
+  flex-grow: 1;
+  background-color: grey;
+}
 
-.content {
-  width: 80%;
-  height: 100%;
-  .mainProduct {
-    display: flex;
-    width: 100%;
-    height: 40%;
-    border: 1px solid rgb(188, 186, 186);
-    .imagenProd {
-      display: flex;
-      width: 40%;
-      height: 300px;
-      flex-grow: 1;
-      background-color: grey;
-    }
-    .contenidoProd {
-      display: flex;
-      flex-direction: column;
-      width: 60%;
-      padding: 3em 2em;
-      hr {
-        margin: 1.5em 0em;
-        &:last-of-type {
-          width: 25%;
-        }
-      }
+.descriptionPd {
+  line-height: 1.8;
+}
 
-      s .descriptionPd {
-        line-height: 1.8;
-      }
-    }
-  }
-
-  .similarProd {
-    display: flex;
-    flex-direction: column;
-    height: 15%;
-    width: 100%;
-    padding: 3em;
-    text-align: center;
-    border: 1px solid rgb(188, 186, 186);
-    .contenedorSimilar {
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
-      .similarprodItem {
-        display: flex;
-        gap: 2em;
-        text-align: left;
-        .imagenSimilar {
-          background-color: grey;
-        }
-        .ImageSim {
-          display: flex;
-          flex-direction: column;
-          height: 75px;
-          width: 75px;
-        }
-        .descSimilar {
-          display: flex;
-          flex-direction: column;
-        }
-      }
-    }
-  }
-
-  .reviews {
-    display: column;
-    height: 35%;
-    padding: 3em;
-    border: 1px solid rgb(188, 186, 186);
-    .reviewItem {
-      display: flex;
-      gap: 2em;
-    }
-  }
-  .estrellaYellow {
-    color: yellow;
-  }
+#ImageSim {
+  height: 200px;
+  width: 200px;
+}
+#avatar {
+  height: 80px;
+  width: 80px;
+}
+#rFont {
+  font-size: 20px;
+  font-family: "Lucida Console";
+}
+.estrellaYellow {
+  color: yellow;
 }
