@@ -8,7 +8,11 @@
         class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
       >
         <a class="navbar-brand" href="#">
-          <img src="./assets/images/logo.png" width="45" height="45" />
+          <img
+            src="./assets/images/2proyecto/logo.png"
+            width="45"
+            height="45"
+          />
         </a>
         <span class="fs-4">logo</span>
       </a>
@@ -27,15 +31,30 @@
     <!--aside-->
     <aside class="left-menu">
       <div class="buttonsContainer">
-        <button type="button" class="btn btn-secondary">Filter</button>
-        <button type="button" class="btn btn-secondary">Reset Filter</button>
+        <input
+          type="text"
+          class="imput"
+          id="cajaFiltro"
+          placeholder="Nombre Producto"
+          [(ngModel)]="filtrado"
+        />
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="filtrarNombre()"
+        >
+          Filter
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="reset()">
+          Reset Filter
+        </button>
       </div>
       <div class="menuContainer">
         <h4>Products</h4>
         <ul>
-          <li *ngFor="let product of prodJson; let index = index">
+          <li *ngFor="let product of productoFiltrado; let index = index">
             <a>
-              <button class="btn" (click)="cambioProducto(product)">
+              <button class="btn" (click)="listaProductos(product)">
                 {{ product.product }}</button
               ><span>></span></a
             >
@@ -62,18 +81,32 @@
         </ul>
       </div>
     </aside>
-    <!--seccion derecha-->
+    <!--seccion derecha  producto seleccionado -->
     <section class="content">
       <!--arriba-->
       <div class="mainProduct">
-        <div class="imagenProd">image placeholder</div>
+        <div class="imagenProd">
+          <img src="{{ pSeleccion.image }}" />
+        </div>
+
         <div class="contenidoProd">
           <h4>{{ pSeleccion.product }}</h4>
-          <h6>
+          <!--<h6>
             {{ pSeleccion.rating }}
-            * reviews
-          </h6>
-
+            ☆ reviews
+          </h6>-->
+          <div class="container">
+            <div class="row">
+              <div class="col-sm">
+                <span
+                  *ngFor="let estrella of estrellaYellow; let i = index"
+                  [ngClass]="{ estrellaYellow: i < pSeleccion.rating }"
+                >
+                  ★</span
+                >
+              </div>
+            </div>
+          </div>
           <hr />
           <h4>$ {{ pSeleccion.price }}</h4>
           <hr />
@@ -82,11 +115,13 @@
           </p>
           <hr />
           <div class="buttonsContainer">
-            <button type="button" class="btn btn-secondary">Delete Item</button>
+            <button class="btn btn-secondary" (click)="eliminar(pSeleccion.id)">
+              Delete Item
+            </button>
           </div>
         </div>
       </div>
-      <!--centro-->
+      <!--centro  -- similar -->
       <div class="similarProd">
         <h4>Similar Products</h4>
         <div class="contenedorSimilar">
@@ -94,26 +129,57 @@
             class="similarprodItem"
             *ngFor="let similarProducts of pSeleccion.similarProducts"
           >
-            <div class="imagenSimilar">image placeholder</div>
+            <!--<div class="imagenSimilar">image placeholder</div>-->
+            <img
+              class="btn ImageSim"
+              src="{{ similarProducts.image }}"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            />
             <div class="descSimilar">
               <h5>{{ similarProducts.product }}</h5>
-              <h6>{{ similarProducts.rating }}</h6>
-              <h6>${{ similarProducts.price }}</h6>
+              <!--<h6>{{ similarProducts.rating }} *</h6>-->
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                    <span
+                      *ngFor="let estrella of estrellaYellow; let i = index"
+                      [ngClass]="{ estrellaYellow: i < similarProducts.rating }"
+                    >
+                      ★</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <h6>$ {{ similarProducts.price }}</h6>
             </div>
           </div>
         </div>
       </div>
-      <!--abajo-->
+
+      <!--abajo -- reviews  -->
       <div class="reviews">
         <h4>Reviews</h4>
         <div class="reviewItem" *ngFor="let review of pSeleccion.reviews">
           <div class="avatar">
-            <p>foto</p>
+            <div><img src="{{ review.image }}" /></div>
           </div>
           <div class="userInfo">
             <p class="userName">{{ review.name }}</p>
-            <p class="date">{{ review.date }}</p>
-            <p class="star">{{ review.raging }}</p>
+            <p class="date">Date: {{ review.date }}</p>
+            <!-- <p class="star">{{ review.raging }}*</p>-->
+            <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <span
+                    *ngFor="let estrella of estrellaYellow; let i = index"
+                    [ngClass]="{ estrellaYellow: i < review.raging }"
+                  >
+                    ★</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
           <div class="reviewText">
             <p>
@@ -126,3 +192,35 @@
     </section>
   </main>
 </body>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">...</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
