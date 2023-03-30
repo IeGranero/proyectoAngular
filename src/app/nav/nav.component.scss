@@ -1,0 +1,24 @@
+.navbar {
+  border: 1px solid rgb(188, 186, 186);
+  input {
+    size: 15;
+    max-lines: 30;
+  }
+  #logo {
+    width: 8%;
+    height: 8%;
+  }
+  .navlink {
+    color: black;
+    border-left: 2px;
+  }
+
+  .menuContainer {
+    padding: 0 2em;
+  }
+  .buttonsContainer {
+    width: 100%;
+    padding-top: 2em;
+    padding-left: 2em;
+  }
+}

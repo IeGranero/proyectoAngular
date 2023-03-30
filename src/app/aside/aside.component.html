@@ -1,0 +1,48 @@
+<!--Aside-->
+<aside id="aside">
+  <div class="row p-4">
+    <input
+      type="text"
+      [(ngModel)]="filtro"
+      placeholder="Nombre del producto"
+      class="form-control"
+    />
+    <div class="col-12 py-2">
+      <div class="buttonsContainer">
+        <button
+          type="button"
+          id="btnFiltrado"
+          class="btn btn-secondary"
+          (click)="filtrarNombre()"
+        >
+          Filter
+        </button>
+      </div>
+      <div class="col-12 py-2">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="resetFiltros()"
+        >
+          Reset Filter
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row m-3">
+    <div class="col-12 my-2">
+      <div class="menuContainer">
+        <h4>Products</h4>
+      </div>
+      <ul>
+        <li *ngFor="let product of productosFiltrado; let index = index">
+          <a>
+            <button class="btn" (click)="seleccionar(product)">
+              {{ product.product }}</button
+            ><span>></span></a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</aside>

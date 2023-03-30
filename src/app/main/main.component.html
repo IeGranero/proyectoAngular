@@ -1,0 +1,135 @@
+<!--arriba-->
+<div class="row">
+  <div class="col-6">
+    <img class="imagenProd" img src="{{ pSeleccion.image }}" />
+  </div>
+  <div class="col-6">
+    <div class="row bor">
+      <div class="col-12 py-3">
+        <h3>{{ pSeleccion.product }}</h3>
+        <button
+          class="botonFav"
+          (click)="favoritos()"
+          [ngStyle]="{
+            color: pSeleccion.favoritos === true ? 'red' : 'black'
+          }"
+        >
+          ☻
+        </button>
+        <!--star-->
+        <div class="stars-outer">
+          <div
+            class="stars-inner"
+            [style.width.%]="pSeleccion.rating * 20"
+            [ngStyle]="{
+              color:
+                pSeleccion.rating > 4
+                  ? 'yellow'
+                  : pSeleccion.rating <= 4 && pSeleccion.rating >= 3
+                  ? 'orange'
+                  : 'red'
+            }"
+          ></div>
+        </div>
+        <!--fin star-->
+        <hr />
+        <div class="col-12 py-4">
+          <h3>$ {{ pSeleccion.price }}</h3>
+          <hr />
+        </div>
+        <div class="col-12 py-4">
+          <p id="rFont">{{ pSeleccion.description }}</p>
+        </div>
+        <hr />
+        <div class="col-12 py-5">
+          <button class="btn btn-secondary" (click)="eliminar()">
+            Delete Item
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <!--centro  -- similar -->
+  <div class="row">
+    <div class="col-12 p-6">
+      <h2 class="text-center">
+        <u>Similar Products</u>
+      </h2>
+      <div class="row my-4">
+        <div
+          class="col-6 d-flex btn"
+          data-bs-toggle="modal"
+          data-bs-target="#similarModal"
+          *ngFor="let similarProducts of pSeleccion.similarProducts"
+        >
+          <div class="icon-square text-dark me-3">
+            <img id="ImageSim" src="{{ similarProducts.image }}" />
+          </div>
+          <div>
+            <h4>{{ similarProducts.product }}</h4>
+            <!--star-->
+            <div class="stars-outer">
+              <div
+                class="stars-inner"
+                [style.width.%]="similarProducts.rating * 20"
+                [ngStyle]="{
+                  color:
+                    similarProducts.rating > 4
+                      ? 'yellow'
+                      : similarProducts.rating <= 4 &&
+                        similarProducts.rating >= 3
+                      ? 'orange'
+                      : 'red'
+                }"
+              ></div>
+            </div>
+            <!--fin star-->
+            <h6>$ {{ similarProducts.price }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+  </div>
+  <!--abajo -- reviews  -->
+  <div class="row">
+    <div class="col-12">
+      <h1 class="p-4"><u>Reviews</u></h1>
+      <div class="row p-4" *ngFor="let review of pSeleccion.reviews">
+        <div class="col-3">
+          <img id="avatar" src="{{ review.image }}" alt="" />
+        </div>
+        <div class="col-3">
+          <div class="row my-3">
+            <div id="rFont" class="col-12 p-1">{{ review.name }}</div>
+            <div id="rFont" class="col-12 p-1">{{ review.raging }}</div>
+            <div id="rFont" class="col-12 p-1">
+              <!--star-->
+              <div class="stars-outer">
+                <div
+                  class="stars-inner"
+                  [style.width.%]="review.raging * 20"
+                  [ngStyle]="{
+                    color:
+                      review.raging > 4
+                        ? 'yellow'
+                        : review.raging <= 4 && review.raging >= 3
+                        ? 'orange'
+                        : 'red'
+                  }"
+                ></div>
+              </div>
+              <!--fin star-->
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <p id="rFont" class="my-2">{{ review.opinion }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!---->
+</div>

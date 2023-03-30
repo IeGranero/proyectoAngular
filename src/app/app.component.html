@@ -1,206 +1,54 @@
 <body>
-  <!-- navegador -->
-  <nav class="navbar navbar-expand">
-    <img
-      class="navbar-brand mx-5"
-      id="logo"
-      src="./assets/images/2proyecto/logo.png"
-      alt=""
-    />
-    <div class="navbar-collapse">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item p-2 border-end">
-          <a class="nav-link active" id="navlink" href="#">Home</a>
-        </li>
-        <li class="nav-item p-2 border-end">
-          <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item p-2 border-end">
-          <a class="nav-link" href="#">Shop</a>
-        </li>
-        <li class="nav-item p-2">
-          <a class="nav-link" href="#">Help</a>
-        </li>
-        <li class="nav-item py-3 mx-4">
-          <button class="bg-secondary text-white">Your Cart</button>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <div class="main">
+  <app-nav></app-nav>
+  <div class="centro">
     <!--Aside-->
-    <aside id="aside">
-      <div class="row p-4">
-        <input
-          type="text"
-          [(ngModel)]="filtrado"
-          placeholder="Nombre del producto"
-          class="form-control"
-        />
-        <div class="col-12 py-2">
-          <div class="buttonsContainer">
-            <button
-              type="button"
-              id="btnFiltrado"
-              class="btn btn-secondary"
-              (click)="filtrarNombre()"
-            >
-              Filter
-            </button>
-          </div>
-          <div class="col-12 py-2">
-            <button type="button" class="btn btn-secondary" (click)="reset()">
-              Reset Filter
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="row m-3">
-        <div class="col-12 my-2">
-          <div class="menuContainer">
-            <h4>Products</h4>
-          </div>
-          <ul>
-            <li *ngFor="let product of productoFiltrado; let index = index">
-              <a>
-                <button class="btn" (click)="listaProductos(product)">
-                  {{ product.product }}</button
-                ><span>></span></a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </aside>
+    <app-aside
+      [pSeleccion]="pSeleccion"
+      [productosFiltrado]="productoFiltrado"
+      (reset)="reset()"
+      (filtrado)="filtrarNombre($event)"
+      (seleccionarProducto)="seleccionarProducto($event)"
+    ></app-aside>
     <!--seccion derecha  producto seleccionado -->
     <div class="container-fluid" id="pSelec">
       <div class="row">
-        <!--arriba-->
-        <div class="col-6">
-          <img class="imagenProd" img src="{{ pSeleccion.image }}" />
-        </div>
-        <div class="col-6">
-          <div class="row bor">
-            <div class="col-12 py-3">
-              <h3>{{ pSeleccion.product }}</h3>
-              <span
-                *ngFor="let estrella of estrellaYellow; let i = index"
-                [ngClass]="{ estrellaYellow: i < pSeleccion.rating }"
+        <app-main
+          [pSeleccion]="pSeleccion"
+          [productosFiltrado]="productoFiltrado"
+          (delete)="eliminar($event)"
+          (fav)="favoritos()"
+        ></app-main>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="similarModal"
+        tabindex="-1"
+        aria-labelledby="similarModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5
+                class="modal-titles"
+                *ngFor="let similarProducts of pSeleccion.similarProducts"
               >
-                ★</span
-              >
+                {{ similarProducts.product }}
+              </h5>
             </div>
-            <hr />
-            <div class="col-12 py-4">
-              <h3>$ {{ pSeleccion.price }}</h3>
-              <hr />
+            <div class="modal-body">
+              <img class="w-100" src="" alt="foto" />
             </div>
-            <div class="col-12 py-4">
-              <p id="rFont">{{ pSeleccion.description }}</p>
-            </div>
-            <hr />
-            <div class="col-12 py-5">
+            <div class="modal-footer">
               <button
+                type="button"
                 class="btn btn-secondary"
-                (click)="eliminar(pSeleccion.id)"
+                data-bs-dismiss="modal"
               >
-                Delete Item
+                Cerrar
               </button>
             </div>
-          </div>
-        </div>
-        <hr />
-      </div>
-      <!--centro  -- similar -->
-      <div class="row">
-        <div class="col-12 p-6">
-          <h2 class="text-center">
-            <u>Similar Products</u>
-          </h2>
-          <div class="row my-4">
-            <div
-              class="col-6 d-flex btn"
-              data-bs-toggle="modal"
-              data-bs-target="#similarModal"
-              *ngFor="let similarProducts of pSeleccion.similarProducts"
-            >
-              <div class="icon-square text-dark me-3">
-                <img id="ImageSim" src="{{ similarProducts.image }}" />
-              </div>
-              <div>
-                <h4>{{ similarProducts.product }}</h4>
-                <span
-                  *ngFor="let estrella of estrellaYellow; let i = index"
-                  [ngClass]="{ estrellaYellow: i < similarProducts.rating }"
-                >
-                  ★</span
-                >
-                <h6>$ {{ similarProducts.price }}</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr />
-      </div>
-      <!--abajo -- reviews  -->
-      <div class="row">
-        <div class="col-12">
-          <h1 class="p-4"><u>Reviews</u></h1>
-          <div class="row p-4" *ngFor="let review of pSeleccion.reviews">
-            <div class="col-3">
-              <img id="avatar" src="{{ review.image }}" alt="" />
-            </div>
-            <div class="col-3">
-              <div class="row my-3">
-                <div id="rFont" class="col-12 p-1">{{ review.name }}</div>
-                <div id="rFont" class="col-12 p-1">{{ review.raging }}</div>
-                <div id="rFont" class="col-12 p-1">
-                  <span
-                    *ngFor="let estrella of estrellaYellow; let i = index"
-                    [ngClass]="{ estrellaYellow: i < review.raging }"
-                  >
-                    ★</span
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="col-6">
-              <p id="rFont" class="my-2">{{ review.opinion }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="similarModal"
-      tabindex="-1"
-      aria-labelledby="similarModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5
-              class="modal-titles"
-              *ngFor="let similarProducts of pSeleccion.similarProducts"
-            >
-              {{ similarProducts.product }}
-            </h5>
-          </div>
-          <div class="modal-body">
-            <img class="w-100" src="" alt="foto" />
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cerrar
-            </button>
           </div>
         </div>
       </div>
