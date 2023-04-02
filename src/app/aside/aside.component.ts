@@ -23,7 +23,7 @@ export class AsideComponent {
     this.filtrado.emit(this.filtro);
   }
 
-  seleccionar(producto: Producto) {
+  setProductoSeleccionado(producto: Producto) {
     this.seleccionarProducto.emit(producto);
   }
 }

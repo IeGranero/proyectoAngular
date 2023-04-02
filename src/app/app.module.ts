@@ -9,9 +9,16 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { NavComponent } from './nav/nav.component';
 import { AsideComponent } from './aside/aside.component';
 import { MainComponent } from './main/main.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, AsideComponent, MainComponent],
+  declarations: [
+    AppComponent,
+    NavComponent,
+    AsideComponent,
+    MainComponent,
+    ModalComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -37,7 +37,7 @@
       <ul>
         <li *ngFor="let product of productosFiltrado; let index = index">
           <a>
-            <button class="btn" (click)="seleccionar(product)">
+            <button class="btn" (click)="setProductoSeleccionado(product)">
               {{ product.product }}</button
             ><span>></span></a
           >

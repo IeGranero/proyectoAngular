@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PRODUCTOS } from './data/datos';
-import { Producto } from './interfaces/producto';
+import { Producto, ProductoSimilar } from './interfaces/producto';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +19,14 @@ export class AppComponent {
   productoSimilar: Producto[] = this.prodJson;
   review: Producto[] = this.prodJson;
 
+  dataModal: ProductoSimilar = {
+    image: '',
+    product: '',
+    price: 0,
+    currency: '',
+    rating: 0,
+    description: '',
+  };
   seleccionarProducto(product: any) {
     this.pSeleccion = product;
   }
@@ -33,17 +41,9 @@ export class AppComponent {
     this.productoFiltrado = this.prodJson;
   }
 
-  // asignarEstrella(idproducto: number) {
-  //   const productoEncontrado = this.prodJson.find(
-  //     (prod) => prod.id === idproducto
-  //   );
-  //   // si productoEncontrado = {} entonces TRUE ->lo agrega a prodencontrado
-  //   // si productoEncontrado = undefined entonces FALSE ->deja en prod estrella this.prodJson[0];
-
-  //   this.prodEstrella = productoEncontrado
-  //     ? productoEncontrado
-  //     : this.prodEstrella;
-  // }
+  infoModal(productModal: ProductoSimilar) {
+    this.dataModal = productModal;
+  }
 
   eliminar(id: number) {
     this.productoFiltrado.splice(

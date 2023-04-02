@@ -1,55 +1,63 @@
 <!--arriba-->
+
 <div class="row">
-  <div class="col-6">
-    <img class="imagenProd" img src="{{ pSeleccion.image }}" />
-  </div>
-  <div class="col-6">
-    <div class="row bor">
-      <div class="col-12 py-3">
-        <h3>{{ pSeleccion.product }}</h3>
-        <button
-          class="botonFav"
-          (click)="favoritos()"
-          [ngStyle]="{
-            color: pSeleccion.favoritos === true ? 'red' : 'black'
-          }"
-        >
-          ☻
-        </button>
-        <!--star-->
-        <div class="stars-outer">
-          <div
-            class="stars-inner"
-            [style.width.%]="pSeleccion.rating * 20"
+  <div
+    class="row"
+    *ngIf="pSeleccion"
+    [ngClass]="{ favoritos: pSeleccion.favoritos }"
+  >
+    <div class="col-6">
+      <img class="imagenProd" img src="{{ pSeleccion.image }}" />
+    </div>
+
+    <div class="col-6">
+      <div class="row bor">
+        <div class="col-12 py-3">
+          <h3>{{ pSeleccion.product }}</h3>
+          <button
+            class="botonFav"
+            (click)="favoritos()"
             [ngStyle]="{
-              color:
-                pSeleccion.rating > 4
-                  ? 'yellow'
-                  : pSeleccion.rating <= 4 && pSeleccion.rating >= 3
-                  ? 'orange'
-                  : 'red'
+              color: pSeleccion.favoritos === true ? 'red' : 'black'
             }"
-          ></div>
-        </div>
-        <!--fin star-->
-        <hr />
-        <div class="col-12 py-4">
-          <h3>$ {{ pSeleccion.price }}</h3>
-          <hr />
-        </div>
-        <div class="col-12 py-4">
-          <p id="rFont">{{ pSeleccion.description }}</p>
-        </div>
-        <hr />
-        <div class="col-12 py-5">
-          <button class="btn btn-secondary" (click)="eliminar()">
-            Delete Item
+          >
+            ☻
           </button>
+          <!--star-->
+          <div class="stars-outer">
+            <div
+              class="stars-inner"
+              [style.width.%]="pSeleccion.rating * 20"
+              [ngStyle]="{
+                color:
+                  pSeleccion.rating > 4
+                    ? 'yellow'
+                    : pSeleccion.rating <= 4 && pSeleccion.rating >= 3
+                    ? 'orange'
+                    : 'red'
+              }"
+            ></div>
+          </div>
+          <!--fin star-->
+          <hr />
+          <div class="col-12 py-4">
+            <h3>$ {{ pSeleccion.price }}</h3>
+            <hr />
+          </div>
+          <div class="col-12 py-4">
+            <p id="rFont">{{ pSeleccion.description }}</p>
+          </div>
+          <hr />
+          <div class="col-12 py-5">
+            <button class="btn btn-secondary" (click)="eliminar()">
+              Delete Item
+            </button>
+          </div>
         </div>
       </div>
     </div>
+    <hr />
   </div>
-  <hr />
   <!--centro  -- similar -->
   <div class="row">
     <div class="col-12 p-6">
@@ -62,6 +70,7 @@
           data-bs-toggle="modal"
           data-bs-target="#similarModal"
           *ngFor="let similarProducts of pSeleccion.similarProducts"
+          (click)="infoModal(similarProducts)"
         >
           <div class="icon-square text-dark me-3">
             <img id="ImageSim" src="{{ similarProducts.image }}" />
