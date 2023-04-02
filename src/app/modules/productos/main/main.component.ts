@@ -1,5 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Producto, ProductoSimilar, Review } from '../interfaces/producto';
+import {
+  Producto,
+  ProductoSimilar,
+  Review,
+} from '../../../interfaces/producto';
 
 @Component({
   selector: 'app-main',

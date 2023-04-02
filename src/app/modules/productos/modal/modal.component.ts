@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ProductoSimilar } from '../interfaces/producto';
+import { ProductoSimilar } from '../../../interfaces/producto';
 
 @Component({
   selector: 'app-modal',

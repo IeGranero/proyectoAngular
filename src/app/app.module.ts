@@ -5,25 +5,20 @@ import { Component, Input } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { NavComponent } from './nav/nav.component';
-import { AsideComponent } from './aside/aside.component';
-import { MainComponent } from './main/main.component';
-import { ModalComponent } from './modal/modal.component';
+import { ProductosModule } from './modules/productos/productos.module';
+import { NavComponent } from './modules/productos/nav/nav.component';
+import { FooterComponent } from './footer/footer.component';
+import { AboutModule } from './modules/about/about.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    AsideComponent,
-    MainComponent,
-    ModalComponent,
-  ],
+  declarations: [AppComponent, NavComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ModalModule.forRoot(),
+
+    ProductosModule,
+    AboutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

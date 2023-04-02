@@ -1,0 +1,26 @@
+<body>
+  <div class="centro">
+    <!--Aside-->
+    <app-aside
+      [pSeleccion]="pSeleccion"
+      [productosFiltrado]="productoFiltrado"
+      (reset)="reset()"
+      (filtrado)="filtrarNombre($event)"
+      (seleccionarProducto)="seleccionarProducto($event)"
+    ></app-aside>
+    <!--seccion derecha  producto seleccionado -->
+    <div class="container-fluid" id="pSelec">
+      <div class="row">
+        <app-main
+          [pSeleccion]="pSeleccion"
+          [productosFiltrado]="productoFiltrado"
+          (delete)="eliminar($event)"
+          (fav)="favoritos()"
+          (productModal)="infoModal($event)"
+        ></app-main>
+        <app-modal [productModal]="dataModal"></app-modal>
+      </div>
+      <!-- Modal -->
+    </div>
+  </div>
+</body>
