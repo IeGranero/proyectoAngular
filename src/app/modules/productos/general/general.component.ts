@@ -8,7 +8,7 @@ import { Producto, ProductoSimilar } from 'src/app/interfaces/producto';
   styleUrls: ['./general.component.scss'],
 })
 export class GeneralComponent {
-  title = '3 Proyecto';
+  title = '4 Proyecto';
 
   prodJson: Producto[] = PRODUCTOS;
   pSeleccion: Producto = this.prodJson[0];
@@ -45,12 +45,16 @@ export class GeneralComponent {
     this.dataModal = productModal;
   }
 
-  eliminar(id: number) {
+  eliminar() {
     this.productoFiltrado.splice(
-      this.productoFiltrado.findIndex((prod) => prod.id === id),
+      this.productoFiltrado.findIndex((prod) => {
+        return prod.product === this.pSeleccion.product;
+      }),
       1
     );
+    //console.log(this.productoFiltrado);
     this.pSeleccion = this.prodJson[0];
+    this.productoFiltrado = this.prodJson;
   }
   favoritos() {
     if (this.pSeleccion.favoritos === false) {

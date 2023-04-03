@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PermissionsGuard } from './guards/permissions.guard';
+import { PermissionsGuardHelp } from './guards/permissions.guardHelp';
 
 const routes: Routes = [
   {
@@ -12,7 +14,7 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'productos',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'about',
@@ -20,6 +22,18 @@ const routes: Routes = [
       import('./modules/about/about.module').then(
         (module) => module.AboutModule
       ),
+  },
+  {
+    path: 'shop',
+    canActivate: [PermissionsGuard],
+    loadChildren: () =>
+      import('./modules/shop/shop.module').then((module) => module.ShopModule),
+  },
+  {
+    path: 'help',
+    canActivate: [PermissionsGuardHelp],
+    loadChildren: () =>
+      import('./modules/help/help.module').then((module) => module.HelpModule),
   },
 ];
 
