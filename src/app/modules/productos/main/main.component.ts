@@ -16,6 +16,7 @@ export class MainComponent {
 
   @Output() delete = new EventEmitter<any>();
   @Output() fav = new EventEmitter<any>();
+  @Output() productShop = new EventEmitter<Producto>();
   @Output() productModal = new EventEmitter<ProductoSimilar>();
 
   filtro = '';
@@ -28,5 +29,9 @@ export class MainComponent {
   }
   infoModal(similarProducts: ProductoSimilar) {
     this.productModal.emit(similarProducts);
+  }
+  infoShop(shopProducts: Producto) {
+    console.log(shopProducts);
+    this.productShop.emit(shopProducts);
   }
 }

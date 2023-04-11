@@ -25,5 +25,5 @@ export interface Review {
   name: string;
   raging: number;
   opinion: string;
-  date?: string;
+  date: Date;
 }

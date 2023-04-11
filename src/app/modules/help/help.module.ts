@@ -10,6 +10,6 @@ import { GeneralHelpComponent } from './generalHelp/generalHelp.component';
 })
 export class HelpModule {
   estaLogueadoHelp(): boolean {
-    return true;
+    return false;
   }
 }

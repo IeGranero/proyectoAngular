@@ -6,6 +6,7 @@ import { AsideComponent } from './aside/aside.component';
 import { MainComponent } from './main/main.component';
 import { ModalComponent } from './modal/modal.component';
 import { GeneralComponent } from './general/general.component';
+import { ShopModule } from '../shop/shop.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,6 @@ import { GeneralComponent } from './general/general.component';
     GeneralComponent,
   ],
 
-  imports: [CommonModule, ProductosRoutingModule, FormsModule],
+  imports: [CommonModule, ProductosRoutingModule, FormsModule, ShopModule],
 })
 export class ProductosModule {}

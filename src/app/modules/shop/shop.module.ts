@@ -10,6 +10,6 @@ import { GeneralShopComponent } from './generalShop/generalShop.component';
 })
 export class ShopModule {
   estaLogueadoShop(): boolean {
-    return false;
+    return true;
   }
 }

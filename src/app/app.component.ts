@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ServicesProductosService } from './services/services-productos.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ProyectoInicial';
+
+  constructor(public dataService: ServicesProductosService) {}
+  ngOnInit(): void {
+    this.dataService.getDataProduct();
+  }
 }

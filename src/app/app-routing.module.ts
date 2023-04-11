@@ -25,13 +25,14 @@ const routes: Routes = [
   },
   {
     path: 'shop',
-    canActivate: [PermissionsGuard],
+
     loadChildren: () =>
       import('./modules/shop/shop.module').then((module) => module.ShopModule),
   },
+
   {
     path: 'help',
-    canActivate: [PermissionsGuardHelp],
+    canActivate: [PermissionsGuard],
     loadChildren: () =>
       import('./modules/help/help.module').then((module) => module.HelpModule),
   },

@@ -11,6 +11,8 @@ import { FooterComponent } from './footer/footer.component';
 import { AboutModule } from './modules/about/about.module';
 import { ShopModule } from './modules/shop/shop.module';
 import { HelpModule } from './modules/help/help.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
 
 @NgModule({
   declarations: [AppComponent, NavComponent, FooterComponent],
@@ -23,8 +25,15 @@ import { HelpModule } from './modules/help/help.module';
     AboutModule,
     ShopModule,
     HelpModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

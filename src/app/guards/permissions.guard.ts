@@ -16,13 +16,13 @@ import { HelpModule } from '../modules/help/help.module';
 })
 export class PermissionsGuard implements CanActivate {
   constructor(
-    private shop: ShopModule,
-    // private help: HelpModule,
+    //private shop: ShopModule,
+    private help: HelpModule,
     private router: Router
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.shop.estaLogueadoShop()) {
+    if (this.help.estaLogueadoHelp()) {
       return true;
     } else {
       alert('Lo siento, no estas loguedo, registrese por favor');

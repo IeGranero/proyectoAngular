@@ -1,23 +1,27 @@
-import { Component } from '@angular/core';
-import { PRODUCTOS } from 'src/app/data/datos';
+import { Component, OnInit } from '@angular/core';
+
 import { Producto, ProductoSimilar } from 'src/app/interfaces/producto';
+import { ServicesProductosService } from 'src/app/services/services-productos.service';
 
 @Component({
   selector: 'app-general',
   templateUrl: './general.component.html',
   styleUrls: ['./general.component.scss'],
 })
-export class GeneralComponent {
-  title = '4 Proyecto';
+export class GeneralComponent implements OnInit {
+  title = '5 Proyecto';
 
-  prodJson: Producto[] = PRODUCTOS;
-  pSeleccion: Producto = this.prodJson[0];
-  productoFiltrado: Producto[] = this.prodJson;
+  productServices: Producto[] = [];
+  //prodJson: Producto[] = PRODUCTOS;
+  pSeleccion: Producto = this.productServices[0];
+  productoFiltrado: Producto[] = [];
   nombreModal = '';
-  prodEstrella: Producto = this.prodJson[0];
+  nombreShop = '';
+  prodEstrella: Producto = this.productServices[0];
   estrellaYellow: boolean[] = Array(5).fill(true);
-  productoSimilar: Producto[] = this.prodJson;
-  review: Producto[] = this.prodJson;
+  productoSimilar: Producto[] = [];
+  productoShop: Producto[] = [];
+  review: Producto[] = [];
 
   dataModal: ProductoSimilar = {
     image: '',
@@ -27,18 +31,35 @@ export class GeneralComponent {
     rating: 0,
     description: '',
   };
+
+  constructor(private servicesProductosService: ServicesProductosService) {}
+
+  ngOnInit(): void {
+    this.servicesProductosService.$products.subscribe({
+      next: (response) => {
+        this.productServices = response;
+        this.pSeleccion = this.productServices[0];
+        this.productoFiltrado = this.productServices;
+        this.nombreModal = '';
+        this.nombreShop = '';
+        this.prodEstrella = this.productServices[0];
+        this.review = this.productServices;
+      },
+    });
+  }
+
   seleccionarProducto(product: any) {
     this.pSeleccion = product;
   }
 
   filtrarNombre(filtro: string) {
-    this.productoFiltrado = this.prodJson.filter((nombre) =>
+    this.productoFiltrado = this.productServices.filter((nombre) =>
       nombre.product.toLowerCase().includes(filtro.toLowerCase())
     );
   }
 
   reset() {
-    this.productoFiltrado = this.prodJson;
+    this.productoFiltrado = this.productServices;
   }
 
   infoModal(productModal: ProductoSimilar) {
@@ -53,8 +74,8 @@ export class GeneralComponent {
       1
     );
     //console.log(this.productoFiltrado);
-    this.pSeleccion = this.prodJson[0];
-    this.productoFiltrado = this.prodJson;
+    this.pSeleccion = this.productServices[0];
+    this.productoFiltrado = this.productServices;
   }
   favoritos() {
     if (this.pSeleccion.favoritos === false) {
@@ -62,5 +83,10 @@ export class GeneralComponent {
     } else {
       this.pSeleccion.favoritos = false;
     }
+  }
+  addToShop(productShop: Producto) {
+    this.productoShop.push(productShop);
+    this.servicesProductosService.addShop(this.productoShop);
+    console.log(this.productoShop);
   }
 }
