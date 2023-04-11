@@ -29,6 +29,18 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/shop/shop.module').then((module) => module.ShopModule),
   },
+  {
+    path: 'addNewProduct',
+
+    loadChildren: () =>
+      import('./modules/newproduct/newproduct.module').then(
+        (module) => module.NewProductModule
+      ),
+  },
+  {
+    path: '**',
+    redirectTo: 'addNewProduct',
+  },
 
   {
     path: 'help',

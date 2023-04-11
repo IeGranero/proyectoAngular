@@ -14,6 +14,8 @@ import { HelpModule } from './modules/help/help.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
 
+import { NewProductModule } from './modules/newproduct/newproduct.module';
+
 @NgModule({
   declarations: [AppComponent, NavComponent, FooterComponent],
   imports: [
@@ -25,6 +27,7 @@ import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
     AboutModule,
     ShopModule,
     HelpModule,
+    NewProductModule,
     HttpClientModule,
   ],
   providers: [
