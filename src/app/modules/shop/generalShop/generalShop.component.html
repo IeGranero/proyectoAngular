@@ -1,14 +1,14 @@
 <div class="container-fluid">
-  <div class="row text-center bg-light g-5 my-5">
+  <div class="row row-cols 1 row-cols-md-2 mx-10 g-10 text-center bg-light">
     <div class="col-12" *ngFor="let shopProduct of myCart">
       <p class="display-3">
         {{ shopProduct.product }}
       </p>
       <div class="col-12">
-        <img [src]="shopProduct.image" />
+        <img [src]="shopProduct.image" class="card-img" />
       </div>
       <div class="col-12 py-5">
-        <button class="btn btn-secondary" (click)="deleteShop()">
+        <button class="btn btn-secondary" (click)="deleteShop(shopProduct)">
           Delete Item
         </button>
       </div>

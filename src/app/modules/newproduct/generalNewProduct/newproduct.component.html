@@ -1,100 +1,122 @@
 <div class="container bg-light">
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
-      <div class="col-6 offset-3">
-        <h2>Product Info</h2>
-        <hr />
-        <form
-          class="mt-5"
-          (ngSubmit)="sendUserInfo()"
-          [formGroup]="userForm"
-          autocomplete="off"
-        >
-          <div class="row">
-            <div class="col-12 d-flex justify-content-center">
-              <div class="form-group col-6">
-                <label for="productName">Product Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="productName"
-                  placeholder="Nombre del producto"
-                  formControlName="name"
-                />
-                <small
-                  *ngIf="validateField('name')"
-                  id="nameError"
-                  class="form-text text-danger"
-                  >El campo no puede estar vacío</small
-                >
-              </div>
-              <div class="form-group col-6">
-                <label for="productPrice">Product Price</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="productPrice"
-                  placeholder="Precio del producto"
-                  formControlName="price"
-                />
-                <small
-                  *ngIf="validateField('price')"
-                  id="priceError"
-                  class="form-text text-danger"
-                  >El campo no puede estar vacío</small
-                >
-              </div>
+      <!--general-->
+
+      <form
+        class="mt-5"
+        (ngSubmit)="sendUserInfo()"
+        [formGroup]="userForm"
+        autocomplete="off"
+      >
+        <!--productnew-->
+        <div class="col-12 offset-3">
+          <h2>Product Info</h2>
+        </div>
+        <div class="row">
+          <div class="col-12 d-flex justify-content-centers">
+            <div class="form-group col-6 p-3">
+              <label for="productName">Product Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Nombre del producto"
+                formControlName="name"
+              />
+              <small
+                *ngIf="validateField('name')"
+                id="nameError"
+                class="form-text text-danger"
+                >El campo no puede estar vacío</small
+              >
+            </div>
+            <div class="form-group col-6 p-3">
+              <label for="productPrice">Product Price</label>
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Precio del producto"
+                formControlName="price"
+              />
+              <small
+                *ngIf="validateField('price')"
+                id="priceError"
+                class="form-text text-danger"
+                >El campo no puede estar vacío</small
+              >
             </div>
           </div>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value="false"
-              formControlName="checkFavorite"
-              id="checkFavorite"
-            />
-            <label class="form-check-label" for="flexCheckDefault">
-              Favorite
-            </label>
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label"
-              >Descripcion del producto</label
-            >
-            <textarea
-              class="form-control"
-              id="description"
-              placeholder="Descripcion del producto"
-              formControlName="description"
-            >
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="false"
+            formControlName="checkFavorite"
+          />
+          <label class="form-check-label" for="flexCheckDefault">
+            Favorite
+          </label>
+        </div>
+        <div class="mb-3 p-3">
+          <label for="exampleFormControlTextarea1" class="form-label"
+            >Descripcion del producto</label
+          >
+          <textarea
+            class="form-control"
+            type="text"
+            placeholder="Descripcion del producto"
+            formControlName="description"
+          >
             <small
             *ngIf="validateField('description')"
             id="descriptionError"
             class="form-text text-danger"
             >El campo no puede estar vacío</small
           ></textarea
-            >
-          </div>
-          <button
-            type="submit"
-            [disabled]="userForm.invalid"
-            class="btn btn-primary mb-2"
           >
-            Send
-          </button>
-        </form>
-        <div clas="row">
-          <div class="col-6 offset-3">
-            <p *ngIf="formValue">{{ formValue | json }}</p>
+        </div>
+        <button
+          type="submit"
+          [disabled]="userForm.invalid"
+          class="btn btn-primary mb-2"
+        >
+          Send
+        </button>
+      </form>
+      <!--similar-->
+      <div class="vl"></div>
+      <div class="col-4">
+        <h2>Select Similar</h2>
+
+        <div class="col-12 p-6">
+          <div class="my-4">
+            <div
+              class="col-12 d-flex p-4"
+              *ngFor="let product of productServices; let index = index"
+            >
+              <div class="form-check p-3">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="flexCheckDefault"
+                  value="false"
+                />
+              </div>
+              <img id="ImageSim" src="{{ product.image }}" class="p-2" />
+
+              <div>
+                <h4 class="p-2">{{ product.product }}</h4>
+
+                <h6>$ {{ product.price }}</h6>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-6 offset-3">
-        <h2>Select Similar</h2>
-        <div class="col-6">
-          <hr />
-          <p>asdasdasdasd asdasd asd asd asda sd</p>
+      <div clas="row">
+        <div class="col-6 offset-3">
+          <p *ngIf="formValue">{{ formValue | json }}</p>
         </div>
       </div>
     </div>

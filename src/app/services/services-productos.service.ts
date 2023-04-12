@@ -53,8 +53,6 @@ export class ServicesProductosService {
     });
   }
   addShop(productShop: Producto[]) {
-    console.log('hi3');
-    //this.listShop.push(productShop);
     this.$myCart.next(productShop);
   }
 }

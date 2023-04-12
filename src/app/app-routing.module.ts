@@ -38,15 +38,14 @@ const routes: Routes = [
       ),
   },
   {
-    path: '**',
-    redirectTo: 'addNewProduct',
-  },
-
-  {
     path: 'help',
     canActivate: [PermissionsGuard],
     loadChildren: () =>
       import('./modules/help/help.module').then((module) => module.HelpModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'addNewProduct',
   },
 ];
 

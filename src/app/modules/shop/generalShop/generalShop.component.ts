@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import { GeneralComponent } from '../../productos/general/general.component';
 import { ServicesProductosService } from 'src/app/services/services-productos.service';
+import { Producto } from 'src/app/interfaces/producto';
 
 @Component({
   selector: 'app-general',
@@ -9,7 +10,7 @@ import { ServicesProductosService } from 'src/app/services/services-productos.se
   styleUrls: ['./generalShop.component.scss'],
 })
 export class GeneralShopComponent implements OnInit {
-  myCart: any;
+  myCart: Producto[]=[];
 
   constructor(private servicesProductosService: ServicesProductosService) {}
 
@@ -21,13 +22,16 @@ export class GeneralShopComponent implements OnInit {
     });
     console.log('console log listado', this.myCart);
   }
-  deleteShop() {
-    this.myCart.splice(
-      this.myCart.findIndex((prod: { product: any }) => {
-        return prod.product === this.myCart.product;
-      }),
-      1
-    );
-    this.myCart = this.servicesProductosService;
+  deleteShop(productShopSelect:Producto) {
+    const indiceProducto:number=this.encontrarIndiceProducto(
+      productShopSelect.id
+    )
+    this.myCart.splice(indiceProducto,1);
+    productShopSelect.favoritos=false;
+  }
+  encontrarIndiceProducto(id:number):number{
+    return this.myCart.findIndex((product)=>{
+      return product.id===id;
+    })
   }
 }
