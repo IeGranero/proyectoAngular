@@ -1,12 +1,15 @@
+*{
+  border: 1px solid black;
+}
 #pSelec {
   width: 70%;
 }
 .imagenProd {
-  display: flex;
-  width: 100%;
-  height: 500px;
-  flex-grow: 1;
-  background-color: grey;
+  width:100%;
+  height:100%;
+  object-fit: fill;
+  position: relative;
+  right: 12px;
 }
 
 .descriptionPd {
