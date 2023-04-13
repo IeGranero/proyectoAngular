@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   Producto,
   ProductoSimilar,
-  Review,
 } from '../../../interfaces/producto';
 
 @Component({
@@ -30,8 +29,7 @@ export class MainComponent {
   infoModal(similarProducts: ProductoSimilar) {
     this.productModal.emit(similarProducts);
   }
-  infoShop(shopProducts: Producto) {
-    console.log(shopProducts);
-    this.productShop.emit(shopProducts);
+  AddShop() {
+    this.productShop.emit();
   }
 }

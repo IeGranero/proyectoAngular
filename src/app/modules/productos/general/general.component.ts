@@ -12,7 +12,6 @@ export class GeneralComponent implements OnInit {
   title = '5 Proyecto';
 
   productServices: Producto[] = [];
-  //prodJson: Producto[] = PRODUCTOS;
   pSeleccion: Producto = this.productServices[0];
   productoFiltrado: Producto[] = [];
   nombreModal = '';
@@ -22,6 +21,7 @@ export class GeneralComponent implements OnInit {
   productoSimilar: Producto[] = [];
   productoShop: Producto[] = [];
   review: Producto[] = [];
+  productsCarro: number[] = [];
 
   dataModal: ProductoSimilar = {
     image: '',
@@ -73,7 +73,6 @@ export class GeneralComponent implements OnInit {
       }),
       1
     );
-    //console.log(this.productoFiltrado);
     this.pSeleccion = this.productServices[0];
     this.productoFiltrado = this.productServices;
   }
@@ -84,9 +83,11 @@ export class GeneralComponent implements OnInit {
       this.pSeleccion.favoritos = false;
     }
   }
-  addToShop(productShop: Producto) {
-    this.productoShop.push(productShop);
-    this.servicesProductosService.addShop(this.productoShop);
-    console.log(this.productoShop);
+  addToShop() {
+    const index = this.productServices.findIndex((prod) => {
+      return prod.product === this.pSeleccion.product;
+    });
+    this.productsCarro.push(index);
+    this.productServices.addShop(this.productsCarro);
   }
 }

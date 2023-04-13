@@ -10,28 +10,33 @@ import { Producto } from 'src/app/interfaces/producto';
   styleUrls: ['./generalShop.component.scss'],
 })
 export class GeneralShopComponent implements OnInit {
-  myCart: Producto[]=[];
+  products: Producto[]=[];
+  productsCarro: number[] = [];
+  contador: number[] = [];
 
   constructor(private servicesProductosService: ServicesProductosService) {}
 
   ngOnInit(): void {
-    this.servicesProductosService.$myCart.subscribe({
+    this.servicesProductosService.$products.subscribe({
       next: (response) => {
-        this.myCart = response;
+        this.products = response;
       },
     });
-    console.log('console log listado', this.myCart);
   }
-  deleteShop(productShopSelect:Producto) {
-    const indiceProducto:number=this.encontrarIndiceProducto(
-      productShopSelect.id
+
+  deleteproduct(index:number) {
+    for (let i = 0; i < this.productsCarro.length; i++) {
+      if (this.productsCarro[i] === index) {
+        this.productsCarro.splice(i, 1);
+        i--;
+      }
+    }
+    this.contador.splice(index, 1);
+  }
+
+  contarproductos(){
+    this.productsCarro.forEach(
+      (el) => (this.contador[el] = this.contador[el] + 1 || 1)
     )
-    this.myCart.splice(indiceProducto,1);
-    productShopSelect.favoritos=false;
-  }
-  encontrarIndiceProducto(id:number):number{
-    return this.myCart.findIndex((product)=>{
-      return product.id===id;
-    })
   }
 }

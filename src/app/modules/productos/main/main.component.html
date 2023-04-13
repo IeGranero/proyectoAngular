@@ -1,6 +1,6 @@
 <!--arriba-->
-
-<div class="row">
+<div class="container-fluid ml-5">
+<div class="row d-flex">
   <div
     class="row"
     *ngIf="pSeleccion"
@@ -15,12 +15,12 @@
         <div class="col-12 py-3">
           <h3 class="row">
             {{ pSeleccion.product }}
+            &nbsp;
             <button
               type="button"
-              class="col-2 btn btn-outline-danger"
-              (click)="infoShop(pSeleccion)"
+              class="col-md-2 btn btn-success"
+              (click)="AddShop()"
             >
-              <!--*ngFor="let shopProducts of pSeleccion?.product"-->
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -39,9 +39,27 @@
             </button>
           </h3>
 
+          <!--star-->
+          <div class="stars-outer">
+            <div
+              class="stars-inner"
+              [style.width.%]="pSeleccion.rating * 20"
+              [ngStyle]="{
+                color:
+                  pSeleccion.rating > 4
+                    ? 'yellow'
+                    : pSeleccion.rating <= 4 && pSeleccion.rating >= 3
+                    ? 'orange'
+                    : 'red'
+              }"
+            ></div>
+          </div>
+          <!--fin star-->
+          &nbsp;
+
           <button
             type="button"
-            class="btn btn-outline-danger"
+            class="btn btn-light"
             (click)="favoritos()"
             [ngStyle]="{
               color: pSeleccion.favoritos === true ? 'red' : 'black'
@@ -60,23 +78,6 @@
               ></path>
             </svg>
           </button>
-
-          <!--star-->
-          <div class="stars-outer">
-            <div
-              class="stars-inner"
-              [style.width.%]="pSeleccion.rating * 20"
-              [ngStyle]="{
-                color:
-                  pSeleccion.rating > 4
-                    ? 'yellow'
-                    : pSeleccion.rating <= 4 && pSeleccion.rating >= 3
-                    ? 'orange'
-                    : 'red'
-              }"
-            ></div>
-          </div>
-          <!--fin star-->
           <hr />
           <div class="col-12 py-4">
             <h3>$ {{ pSeleccion.price }}</h3>
@@ -180,6 +181,6 @@
       </div>
     </div>
   </div>
-
   <!---->
+</div>
 </div>

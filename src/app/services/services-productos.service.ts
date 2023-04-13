@@ -10,7 +10,7 @@ export class ServicesProductosService {
   public $products: BehaviorSubject<Producto[]> = new BehaviorSubject<
     Producto[]
   >([]);
-  public $myCart: BehaviorSubject<Producto[]> = new BehaviorSubject<Producto[]>(
+  public $productsCarro: BehaviorSubject<number[]> = new BehaviorSubject<number[]>(
     []
   );
 
@@ -43,16 +43,10 @@ export class ServicesProductosService {
         this.$products.next(response);
 
         this._productosImportSelected = response[firstIndex];
-      },
-
-      error: (error) => {},
-
-      complete: () => {
-        console.log('finish');
-      },
+      }
     });
   }
-  addShop(productShop: Producto[]) {
-    this.$myCart.next(productShop);
+  addShop(productShop: number[]) {
+    this.$productsCarro.next(productShop);
   }
 }
