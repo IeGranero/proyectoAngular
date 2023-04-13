@@ -46,6 +46,11 @@ export class GeneralComponent implements OnInit {
         this.review = this.productServices;
       },
     });
+    this.servicesProductosService.$productsCarro.subscribe({
+      next: (response) => {
+        this.productsCarro = response;
+      },
+    });
   }
 
   seleccionarProducto(product: any) {
@@ -88,6 +93,6 @@ export class GeneralComponent implements OnInit {
       return prod.product === this.pSeleccion.product;
     });
     this.productsCarro.push(index);
-    this.productServices.addShop(this.productsCarro);
+    this.servicesProductosService.addShop(this.productsCarro);
   }
 }

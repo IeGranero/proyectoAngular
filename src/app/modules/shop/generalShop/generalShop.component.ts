@@ -22,6 +22,12 @@ export class GeneralShopComponent implements OnInit {
         this.products = response;
       },
     });
+    this.servicesProductosService.$productsCarro.subscribe({
+      next: (response) => {
+        this.productsCarro = response;
+      },
+    });
+    this.contarproductos();
   }
 
   deleteproduct(index:number) {
