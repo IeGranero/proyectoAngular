@@ -41,7 +41,6 @@ export class ServicesProductosService {
         if (!response) return;
         const firstIndex = 0;
         this.$products.next(response);
-
         this._productosImportSelected = response[firstIndex];
       }
     });
